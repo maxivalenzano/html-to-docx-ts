@@ -35,7 +35,6 @@ import {
   pointToEIP,
 } from '../utils/unit-conversion';
 // FIXME: remove the cyclic dependency
-// eslint-disable-next-line import/no-cycle
 import { buildImage, buildList } from './render-document-file';
 import {
   defaultFont,
@@ -153,7 +152,7 @@ const buildVertAlign = (type = 'baseline') =>
 const buildStrike = () =>
   fragment({ namespaceAlias: { w: namespaces.w } })
     .ele('@w', 'strike')
-    .att('@w', 'val', true)
+    .att('@w', 'val', 'true')
     .up();
 
 const buildBold = () =>
@@ -188,8 +187,8 @@ const buildBorder = (
   fragment({ namespaceAlias: { w: namespaces.w } })
     .ele('@w', borderSide)
     .att('@w', 'val', borderStroke)
-    .att('@w', 'sz', borderSize)
-    .att('@w', 'space', borderSpacing)
+    .att('@w', 'sz', borderSize.toString())
+    .att('@w', 'space', borderSpacing.toString())
     .att('@w', 'color', borderColor)
     .up();
 
@@ -755,7 +754,7 @@ const buildParagraph = (vNode, attributes, docxDocumentInstance) => {
     if (vNode.properties.style['margin-left'] || vNode.properties.style['margin-right']) {
       const leftMargin = fixupMargin(vNode.properties.style['margin-left']);
       const rightMargin = fixupMargin(vNode.properties.style['margin-right']);
-      const indentation = {};
+      const indentation: any = {};
       if (leftMargin) {
         indentation.left = leftMargin;
       }
@@ -876,7 +875,7 @@ const buildGridSpanFragment = (spanValue) =>
 const buildTableCellSpacing = (cellSpacing = 0) =>
   fragment({ namespaceAlias: { w: namespaces.w } })
     .ele('@w', 'tblCellSpacing')
-    .att('@w', 'w', cellSpacing)
+    .att('@w', 'w', cellSpacing.toString())
     .att('@w', 'type', 'dxa')
     .up();
 
@@ -1469,8 +1468,8 @@ const buildTable = (vNode, attributes, docxDocumentInstance) => {
   if (isVNode(vNode) && vNode.properties) {
     const tableAttributes = vNode.properties.attributes || {};
     const tableStyles = vNode.properties.style || {};
-    const tableBorders = {};
-    const tableCellBorders = {};
+    const tableBorders: any = {};
+    const tableCellBorders: any = {};
     let [borderSize, borderStrike, borderColor] = [2, 'single', '000000'];
 
     // eslint-disable-next-line no-restricted-globals

@@ -4,13 +4,19 @@ import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import cleaner from 'rollup-plugin-cleaner';
 import builtins from 'rollup-plugin-node-builtins';
+import merge from 'deepmerge';
+import { createBasicConfig } from '@open-wc/building-rollup';
+// import typescript from '@rollup/plugin-typescript';
 
 import * as meta from './package.json';
 
-export default {
-  input: 'index.js',
+const baseConfig = createBasicConfig();
+
+export default merge(baseConfig, {
+  input: './out-tsc/index.js',
   external: ['color-name', 'escape-html', 'html-to-vdom', 'jszip', 'virtual-dom', 'xmlbuilder2'],
   plugins: [
+    // typescript(),
     resolve(),
     json({ include: 'package.json', preferConst: true }),
     commonjs(),
@@ -41,4 +47,4 @@ export default {
       }`,
     },
   ],
-};
+});

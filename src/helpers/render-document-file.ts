@@ -4,13 +4,11 @@ import VNode from 'virtual-dom/vnode/vnode';
 import VText from 'virtual-dom/vnode/vtext';
 import isVNode from 'virtual-dom/vnode/is-vnode';
 import isVText from 'virtual-dom/vnode/is-vtext';
-// eslint-disable-next-line import/no-named-default
 import { default as HTMLToVDOM } from 'html-to-vdom';
 import escape from 'escape-html';
 import sizeOf from 'image-size';
 
 // FIXME: remove the cyclic dependency
-// eslint-disable-next-line import/no-cycle
 import * as xmlBuilder from './xml-builder';
 import namespaces from '../namespaces';
 import { imageType, internalRelationship } from '../constants';
@@ -232,7 +230,7 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
             );
             xmlFragment.import(tableFragment);
             // Adding empty paragraph for space after table
-            const emptyParagraphFragment = xmlBuilder.buildParagraph(null, {});
+            const emptyParagraphFragment = (xmlBuilder as any).buildParagraph(null, {});
             xmlFragment.import(emptyParagraphFragment);
           } else if (childVNode.tagName === 'img') {
             const imageFragment = buildImage(docxDocumentInstance, childVNode);
@@ -254,7 +252,7 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
       );
       xmlFragment.import(tableFragment);
       // Adding empty paragraph for space after table
-      const emptyParagraphFragment = xmlBuilder.buildParagraph(null, {});
+      const emptyParagraphFragment = (xmlBuilder as any).buildParagraph(null, {});
       xmlFragment.import(emptyParagraphFragment);
       return;
     case 'ol':
@@ -268,7 +266,7 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
       }
       return;
     case 'br':
-      const linebreakFragment = xmlBuilder.buildParagraph(null, {});
+      const linebreakFragment = (xmlBuilder as any).buildParagraph(null, {});
       xmlFragment.import(linebreakFragment);
       return;
   }
@@ -297,7 +295,8 @@ export function convertVTreeToXML(docxDocumentInstance, vTree, xmlFragment) {
   } else if (isVNode(vTree)) {
     findXMLEquivalent(docxDocumentInstance, vTree, xmlFragment);
   } else if (isVText(vTree)) {
-    xmlBuilder.buildTextElement(xmlFragment, escape(String(vTree.text)));
+    //TODO: Fix any
+    (xmlBuilder as any).buildTextElement(xmlFragment, escape(String(vTree.text)));
   }
   return xmlFragment;
 }

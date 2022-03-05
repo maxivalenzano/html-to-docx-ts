@@ -89,7 +89,7 @@ function generateSectionXML(vTree, type = 'header') {
 
   const XMLFragment = fragment();
   convertVTreeToXML(this, vTree, XMLFragment);
-  if (type === 'footer' && XMLFragment.first().node.tagName === 'p' && this.pageNumber) {
+  if (type === 'footer' && (XMLFragment.first().node as any).tagName === 'p' && this.pageNumber) {
     XMLFragment.first().import(
       fragment({ namespaceAlias: { w: namespaces.w } })
         .ele('@w', 'fldSimple')
@@ -108,6 +108,47 @@ function generateSectionXML(vTree, type = 'header') {
 }
 
 class DocxDocument {
+  zip: any;
+  htmlString: any;
+  orientation: any;
+  width: number;
+  height: number;
+  margins: any;
+  availableDocumentSpace: number;
+  title: any;
+  subject: any;
+  creator: any;
+  keywords: any;
+  description: any;
+  lastModifiedBy: any;
+  revision: any;
+  createdAt: any;
+  modifiedAt: any;
+  headerType: any;
+  header: any;
+  footerType: any;
+  footer: any;
+  font: any;
+  fontSize: any;
+  complexScriptFontSize: any;
+  tableRowCantSplit: any;
+  pageNumber: any;
+  skipFirstHeaderFooter: any;
+  lineNumber: any;
+  lastNumberingId: number;
+  lastMediaId: number;
+  lastHeaderId: number;
+  lastFooterId: number;
+  stylesObjects: any[];
+  numberingObjects: any[];
+  relationshipFilename: string;
+  relationships: { fileName: string; lastRelsId: number; rels: any[] }[];
+  mediaFiles: any[];
+  headerObjects: any[];
+  footerObjects: any[];
+  documentXML: any;
+  generateSectionXML: any;
+
   constructor(properties) {
     this.zip = properties.zip;
     this.htmlString = properties.htmlString;
@@ -281,7 +322,7 @@ class DocxDocument {
       [...Array(8).keys()].forEach((level) => {
         const levelFragment = fragment({ namespaceAlias: { w: namespaces.w } })
           .ele('@w', 'lvl')
-          .att('@w', 'ilvl', level)
+          .att('@w', 'ilvl', level.toString())
           .ele('@w', 'start')
           .att(
             '@w',
@@ -310,12 +351,12 @@ class DocxDocument {
           .ele('@w', 'tabs')
           .ele('@w', 'tab')
           .att('@w', 'val', 'num')
-          .att('@w', 'pos', (level + 1) * 720)
+          .att('@w', 'pos', ((level + 1) * 720).toString())
           .up()
           .up()
           .ele('@w', 'ind')
-          .att('@w', 'left', (level + 1) * 720)
-          .att('@w', 'hanging', 360)
+          .att('@w', 'left', ((level + 1) * 720).toString())
+          .att('@w', 'hanging', '360')
           .up()
           .up()
           .up();
