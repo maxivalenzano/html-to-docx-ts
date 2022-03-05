@@ -1,7 +1,6 @@
 import { create } from 'xmlbuilder2';
 import VNode from 'virtual-dom/vnode/vnode';
 import VText from 'virtual-dom/vnode/vtext';
-// eslint-disable-next-line import/no-named-default
 import { default as HTMLToVDOM } from 'html-to-vdom';
 
 import { relsXML } from './schemas';

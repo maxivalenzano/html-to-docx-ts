@@ -5,7 +5,6 @@ export const hslRegex = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/i;
 export const hexRegex = /#([0-9A-F]{6})/i;
 export const hex3Regex = /#([0-9A-F])([0-9A-F])([0-9A-F])/i;
 
-// eslint-disable-next-line import/prefer-default-export
 export const rgbToHex = (red, green, blue) => {
   const hexColorCode = [red, green, blue]
     .map((x) => {

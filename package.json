@@ -15,7 +15,7 @@
   "scripts": {
     "test": "npm run build && node example/example-node.js",
     "release": "standard-version",
-    "lint": "eslint --fix .",
+    "lint": "eslint --fix ./src",
     "prettier:check": "prettier --check '**/*.{js}'",
     "validate": "run-s lint prettier:check",
     "build": "tsc && rollup -c",
@@ -76,7 +76,7 @@
     "lodash": "^4.17.21",
     "nanoid": "^3.3.1",
     "virtual-dom": "^2.1.1",
-    "xmlbuilder2": "2.1.2"
+    "xmlbuilder2": "^3.0.2"
   },
   "lint-staged": {
     "src/**/*.js": [

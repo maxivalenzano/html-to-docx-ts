@@ -1,0 +1,15 @@
+import { fragment } from 'xmlbuilder2';
+import namespaces from '../namespaces';
+
+export function buildBinaryLargeImageOrPicture(relationshipId) {
+  return (
+    fragment({
+      namespaceAlias: { a: namespaces.a, r: namespaces.r },
+    })
+      .ele('@a', 'blip')
+      .att('@r', 'embed', `rId${relationshipId}`)
+      // FIXME: possible values 'email', 'none', 'print', 'hqprint', 'screen'
+      .att('cstate', 'print')
+      .up()
+  );
+}
