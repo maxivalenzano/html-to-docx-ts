@@ -32,6 +32,13 @@ export default merge(baseConfig, {
     {
       file: 'dist/html-to-docx.esm.js',
       format: 'es',
+      globals: {
+        fs: 'fs',
+        path: 'path',
+        util: 'util',
+        events: 'events',
+        'html-to-vdom': 'HTMLToVDOM',
+      },
       sourcemap: true,
       banner: `// ${meta.homepage} v${meta.version} Copyright ${new Date().getFullYear()} ${
         meta.author
@@ -45,6 +52,13 @@ export default merge(baseConfig, {
       banner: `// ${meta.homepage} v${meta.version} Copyright ${new Date().getFullYear()} ${
         meta.author
       }`,
+      globals: {
+        fs: 'fs',
+        path: 'path',
+        util: 'util',
+        events: 'events',
+        'html-to-vdom': 'HTMLToVDOM',
+      },
     },
   ],
 });
