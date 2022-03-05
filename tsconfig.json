@@ -4,7 +4,8 @@
     "baseUrl": "src/",
     "outDir": "./out-tsc",
     "allowJs": true,
-    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
     "target": "es2015",
     "typeRoots": [
       "./types",
