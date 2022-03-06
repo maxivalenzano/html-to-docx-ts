@@ -167,7 +167,7 @@ type Orientation = 'portrait' | 'landscape';
 type HeaderType = 'default' | 'first' | 'even';
 
 class DocxDocument {
-  zip: unknown;
+  zip: any;
   htmlString: string;
   orientation: Orientation;
   width: number;

@@ -3,10 +3,11 @@ import VNode from 'virtual-dom/vnode/vnode';
 import isVNode from 'virtual-dom/vnode/is-vnode';
 import isVText from 'virtual-dom/vnode/is-vtext';
 import { buildParagraph } from './buildParagraph';
+import DocxDocument from 'docx-document';
 
 export function buildList(
   vNode: VirtualDOM.VNode | any,
-  docxDocumentInstance,
+  docxDocumentInstance: DocxDocument,
   xmlFragment: XMLBuilder
 ) {
   const listElements = [];

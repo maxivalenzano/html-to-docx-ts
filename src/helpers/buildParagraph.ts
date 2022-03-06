@@ -13,6 +13,7 @@ import { fixupLineHeight } from './fixupLineHeight';
 import { fixupMargin } from './fixupMargin';
 import { fixupFontSize } from './fixupFontSize';
 import { fixupColorCode } from './fixupColorCode';
+import DocxDocument from 'docx-document';
 
 type NumberingAttributes = {
   levelId: any;
@@ -38,7 +39,7 @@ export type ParagraphAttributes = {
 export function buildParagraph(
   vNode: VirtualDOM.VNode | VirtualDOM.VTree,
   attributes: ParagraphAttributes,
-  docxDocumentInstance
+  docxDocumentInstance: DocxDocument
 ) {
   const paragraphFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'p');
   const modifiedAttributes = { ...attributes };

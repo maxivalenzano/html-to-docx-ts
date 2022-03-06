@@ -14,6 +14,7 @@ import { buildList } from './buildList';
 import { buildParagraph } from './buildParagraph';
 import { buildTable } from './buildTable';
 import { buildTextElement } from './buildTextElement';
+import DocxDocument from 'docx-document';
 
 const convertHTML = HTMLToVDOM({
   VNode,
@@ -51,7 +52,7 @@ function hasPageBreakAfter(vNode: VirtualDOM.VNode): boolean {
 }
 
 function findXMLEquivalent(
-  docxDocumentInstance,
+  docxDocumentInstance: DocxDocument,
   vNode: VirtualDOM.VNode | any,
   xmlFragment: XMLBuilder
 ) {
@@ -170,7 +171,7 @@ function findXMLEquivalent(
 
 // eslint-disable-next-line consistent-return
 export function convertVTreeToXML(
-  docxDocumentInstance,
+  docxDocumentInstance: DocxDocument,
   vTree: VirtualDOM.VNode | VirtualDOM.VTree | VirtualDOM.VTree[],
   xmlFragment: XMLBuilder
 ) {
@@ -195,7 +196,7 @@ export function convertVTreeToXML(
   return xmlFragment;
 }
 
-function renderDocumentFile(docxDocumentInstance) {
+function renderDocumentFile(docxDocumentInstance: DocxDocument) {
   const vTree = convertHTML(docxDocumentInstance.htmlString);
 
   const xmlFragment = fragment({ namespaceAlias: { w: namespaces.w } });

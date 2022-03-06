@@ -9,13 +9,14 @@ import { buildParagraph } from './buildParagraph';
 import { fixupColorCode } from './fixupColorCode';
 import { buildTableCellProperties } from './buildTableCellProperties';
 import { cssBorderParser } from './cssBorderParser';
+import DocxDocument from 'docx-document';
 
 export function buildTableCell(
   vNode: VirtualDOM.VNode,
   attributes,
   rowSpanMap,
   columnIndex,
-  docxDocumentInstance
+  docxDocumentInstance: DocxDocument
 ) {
   const tableCellFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'tc');
 

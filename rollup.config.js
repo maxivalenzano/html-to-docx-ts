@@ -6,6 +6,7 @@ import cleaner from 'rollup-plugin-cleaner';
 import builtins from 'rollup-plugin-node-builtins';
 import typescript from '@rollup/plugin-typescript';
 import * as meta from './package.json';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const globals = {
   fs: 'fs',
@@ -35,6 +36,7 @@ export default {
     cleaner({
       targets: ['./dist/'],
     }),
+    visualizer(), // should be last plguin
   ],
   output: [
     {

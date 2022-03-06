@@ -6,12 +6,13 @@ import { fixupRowHeight } from './fixupRowHeight';
 import { buildTableCell, fixupTableCellBorder } from './buildTableCell';
 import { buildRowSpanCell } from './buildRowSpanCell';
 import { buildTableRowProperties } from './buildTableRowProperties';
+import DocxDocument from 'docx-document';
 
 export function buildTableRow(
   vNode: VirtualDOM.VNode | any,
   attributes,
   rowSpanMap,
-  docxDocumentInstance
+  docxDocumentInstance: DocxDocument
 ) {
   const tableRowFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'tr');
   const modifiedAttributes = { ...attributes };
