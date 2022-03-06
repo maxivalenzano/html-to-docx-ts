@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { fragment } from 'xmlbuilder2';
 import VText from 'virtual-dom/vnode/vtext';
 import VNode from 'virtual-dom/vnode/vnode';
@@ -7,7 +6,6 @@ import isVText from 'virtual-dom/vnode/is-vtext';
 import { default as HTMLToVDOM } from 'html-to-vdom';
 import escape from 'escape-html';
 
-// FIXME: remove the cyclic dependency
 import namespaces from '../namespaces';
 import { vNodeHasChildren } from '../utils/vnode';
 import { buildImage } from './buildImage';
@@ -46,7 +44,7 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
     case 'h3':
     case 'h4':
     case 'h5':
-    case 'h6':
+    case 'h6': {
       const headingFragment = buildParagraph(
         vNode,
         {
@@ -56,6 +54,7 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
       );
       xmlFragment.import(headingFragment);
       return;
+    }
     case 'span':
     case 'strong':
     case 'b':
@@ -73,11 +72,12 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
     case 'a':
     case 'blockquote':
     case 'code':
-    case 'pre':
+    case 'pre': {
       const paragraphFragment = buildParagraph(vNode, {}, docxDocumentInstance);
       xmlFragment.import(paragraphFragment);
       return;
-    case 'figure':
+    }
+    case 'figure': {
       if (vNodeHasChildren(vNode)) {
         // eslint-disable-next-line no-plusplus
         for (let index = 0; index < vNode.children.length; index++) {
@@ -104,7 +104,8 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
         }
       }
       return;
-    case 'table':
+    }
+    case 'table': {
       const tableFragment = buildTable(
         vNode,
         {
@@ -118,20 +119,23 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
       const emptyParagraphFragment = buildParagraph(null, {}, docxDocumentInstance);
       xmlFragment.import(emptyParagraphFragment);
       return;
+    }
     case 'ol':
     case 'ul':
       buildList(vNode, docxDocumentInstance, xmlFragment);
       return;
-    case 'img':
+    case 'img': {
       const imageFragment = buildImage(docxDocumentInstance, vNode);
       if (imageFragment) {
         xmlFragment.import(imageFragment);
       }
       return;
-    case 'br':
+    }
+    case 'br': {
       const linebreakFragment = buildParagraph(null, {}, docxDocumentInstance);
       xmlFragment.import(linebreakFragment);
       return;
+    }
   }
   if (vNodeHasChildren(vNode)) {
     // eslint-disable-next-line no-plusplus

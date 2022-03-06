@@ -12,7 +12,10 @@ export function buildPicture({
   width,
   height,
 }) {
-  const pictureFragment = fragment({ namespaceAlias: { pic: namespaces.pic } }).ele('@pic', 'pic');
+  const pictureFragment = fragment({ namespaceAlias: { pic: namespaces.pic } }).ele(
+    '@pic',
+    'pic:pic'
+  );
   const nonVisualPicturePropertiesFragment = buildNonVisualPictureProperties(
     id,
     fileNameWithExtension,

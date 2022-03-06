@@ -2,8 +2,6 @@ import sizeOf from 'image-size';
 import { buildParagraph } from './buildParagraph';
 import { imageType, internalRelationship } from '../constants';
 
-// eslint-disable-next-line consistent-return, no-shadow
-
 export function buildImage(docxDocumentInstance, vNode, maximumWidth = null) {
   let response = null;
   try {

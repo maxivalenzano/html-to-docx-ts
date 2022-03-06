@@ -8,6 +8,8 @@ export function buildDrawing(inlineOrAnchored = false, graphicType, attributes) 
   const inlineOrAnchoredDrawingFragment = inlineOrAnchored
     ? buildInlineDrawing(graphicType, attributes)
     : buildAnchoredDrawing(graphicType, attributes);
+  console.log('drawingFrag', drawingFragment.toString());
+  console.log('inline', inlineOrAnchoredDrawingFragment.toString());
   drawingFragment.import(inlineOrAnchoredDrawingFragment);
   drawingFragment.up();
 

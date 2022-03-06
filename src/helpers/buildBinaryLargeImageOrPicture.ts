@@ -6,8 +6,8 @@ export function buildBinaryLargeImageOrPicture(relationshipId) {
     fragment({
       namespaceAlias: { a: namespaces.a, r: namespaces.r },
     })
-      .ele('@a', 'blip')
-      .att('@r', 'embed', `rId${relationshipId}`)
+      .ele('@a', 'a:blip')
+      .att('@r', 'r:embed', `rId${relationshipId}`)
       // FIXME: possible values 'email', 'none', 'print', 'hqprint', 'screen'
       .att('cstate', 'print')
       .up()

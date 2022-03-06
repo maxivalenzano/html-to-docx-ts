@@ -140,7 +140,7 @@ const htmlString = `<!DOCTYPE html>
 
   fs.writeFile(filePath, fileBuffer, (error) => {
     if (error) {
-      console.log('Docx file creation failed');
+      console.log('Docx file creation failed', error);
       return;
     }
     console.log('Docx file created successfully');

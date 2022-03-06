@@ -7,7 +7,7 @@ import { buildExtent } from './buildExtent';
 
 export function buildInlineDrawing(graphicType, attributes) {
   const inlineDrawingFragment = fragment({ namespaceAlias: { wp: namespaces.wp } })
-    .ele('@wp', 'inline')
+    .ele('@wp', 'wp:inline')
     .att('distB', '0')
     .att('distL', '0')
     .att('distR', '0')

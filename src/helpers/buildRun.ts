@@ -82,7 +82,6 @@ export function buildRun(vNode, attributes) {
     runFragment.import(textFragment);
   } else if (attributes && attributes.type === 'picture') {
     const { type, inlineOrAnchored, ...otherAttributes } = attributes;
-    // eslint-disable-next-line no-use-before-define
     const imageFragment = buildDrawing(inlineOrAnchored, type, otherAttributes);
     runFragment.import(imageFragment);
   } else if (isVNode(vNode) && vNode.tagName === 'br') {
