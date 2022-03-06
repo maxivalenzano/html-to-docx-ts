@@ -20,7 +20,6 @@
     "prettier:check": "prettier --check '**/*.{js}'",
     "validate": "run-s lint prettier:check",
     "build": "rollup -c",
-    "buildtsc": "tsc && rollup -c",
     "prepare": "husky install"
   },
   "repository": {
