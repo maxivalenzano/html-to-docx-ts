@@ -1,3 +1,4 @@
+import { RunAttributes } from './buildRunProperties';
 import isVNode from 'virtual-dom/vnode/is-vnode';
 import { colorlessColors } from '../constants';
 import { fixupColorCode } from './fixupColorCode';
@@ -10,7 +11,7 @@ export function buildRunOrRuns(vNode, attributes) {
 
     for (let index = 0; index < vNode.children.length; index++) {
       const childVNode = vNode.children[index];
-      const modifiedAttributes = { ...attributes };
+      const modifiedAttributes: RunAttributes = { ...attributes };
       if (isVNode(vNode) && vNode.properties && vNode.properties.style) {
         if (
           vNode.properties.style.color &&

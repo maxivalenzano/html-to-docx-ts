@@ -1,9 +1,10 @@
+import { ExtentProps } from './buildExtents';
 import { fragment } from 'xmlbuilder2';
 import namespaces from '../namespaces';
 import { buildPresetGeometry } from './buildPresetGeometry';
 import { buildGraphicFrameTransform } from './buildGraphicFrameTransform';
 
-export function buildShapeProperties(attributes) {
+export function buildShapeProperties(attributes: ExtentProps) {
   const shapeProperties = fragment({ namespaceAlias: { pic: namespaces.pic } }).ele('@pic', 'spPr');
 
   const graphicFrameTransformFragment = buildGraphicFrameTransform(attributes);

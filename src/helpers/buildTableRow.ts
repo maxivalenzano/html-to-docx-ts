@@ -7,7 +7,12 @@ import { buildTableCell, fixupTableCellBorder } from './buildTableCell';
 import { buildRowSpanCell } from './buildRowSpanCell';
 import { buildTableRowProperties } from './buildTableRowProperties';
 
-export function buildTableRow(vNode, attributes, rowSpanMap, docxDocumentInstance) {
+export function buildTableRow(
+  vNode: VirtualDOM.VNode | any,
+  attributes,
+  rowSpanMap,
+  docxDocumentInstance
+) {
   const tableRowFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'tr');
   const modifiedAttributes = { ...attributes };
   if (isVNode(vNode) && vNode.properties) {

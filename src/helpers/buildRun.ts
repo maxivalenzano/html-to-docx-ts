@@ -1,5 +1,4 @@
 import { fragment } from 'xmlbuilder2';
-import { VText } from 'virtual-dom';
 import isVNode from 'virtual-dom/vnode/is-vnode';
 import isVText from 'virtual-dom/vnode/is-vtext';
 import namespaces from '../namespaces';
@@ -7,9 +6,10 @@ import { buildLineBreak } from './buildLineBreak';
 import { buildDrawing } from './buildDrawing';
 import { buildTextElement } from './buildTextElement';
 import { buildTextFormatting } from './buildTextFormatting';
-import { buildRunProperties } from './buildRunProperties';
+import { buildRunProperties, RunAttributes } from './buildRunProperties';
+import VText from 'virtual-dom/vnode/vtext';
 
-export function buildRun(vNode, attributes) {
+export function buildRun(vNode: VirtualDOM.VNode | VirtualDOM.VTree, attributes: RunAttributes) {
   const runFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'r');
   const runPropertiesFragment = buildRunProperties(attributes);
 
@@ -36,7 +36,7 @@ export function buildRun(vNode, attributes) {
   ) {
     const textArray = [];
 
-    let vNodes = [vNode];
+    let vNodes: VirtualDOM.VNode[] | VirtualDOM.VTree[] | any[] = [vNode];
     while (vNodes.length) {
       const tempVNode = vNodes.shift();
       if (isVText(tempVNode)) {

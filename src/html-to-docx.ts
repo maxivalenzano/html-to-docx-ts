@@ -1,3 +1,4 @@
+import JSZip from 'jszip';
 import { create } from 'xmlbuilder2';
 import VNode from 'virtual-dom/vnode/vnode';
 import VText from 'virtual-dom/vnode/vtext';
@@ -103,11 +104,11 @@ const normalizeDocumentOptions = (documentOptions) => {
 // Ref: https://en.wikipedia.org/wiki/Office_Open_XML_file_formats
 // http://officeopenxml.com/anatomyofOOXML.php
 function addFilesToContainer(
-  zip,
-  htmlString,
+  zip: JSZip,
+  htmlString: string,
   suppliedDocumentOptions,
-  headerHTMLString,
-  footerHTMLString
+  headerHTMLString: string,
+  footerHTMLString: string
 ) {
   const normalizedDocumentOptions = normalizeDocumentOptions(suppliedDocumentOptions);
   const documentOptions = mergeOptions(defaultDocumentOptions, normalizedDocumentOptions);

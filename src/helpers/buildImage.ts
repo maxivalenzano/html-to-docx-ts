@@ -2,11 +2,17 @@ import sizeOf from 'image-size';
 import { buildParagraph } from './buildParagraph';
 import { imageType, internalRelationship } from '../constants';
 
-export function buildImage(docxDocumentInstance, vNode, maximumWidth = null) {
+export function buildImage(
+  docxDocumentInstance,
+  vNode: VirtualDOM.VNode | VirtualDOM.VTree,
+  maximumWidth = null
+) {
   let response = null;
   try {
     // libtidy encodes the image src
-    response = docxDocumentInstance.createMediaFile(decodeURIComponent(vNode.properties.src));
+    response = docxDocumentInstance.createMediaFile(
+      decodeURIComponent((vNode as any).properties.src)
+    );
   } catch (error) {
     // NOOP
   }

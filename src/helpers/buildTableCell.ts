@@ -10,7 +10,13 @@ import { fixupColorCode } from './fixupColorCode';
 import { buildTableCellProperties } from './buildTableCellProperties';
 import { cssBorderParser } from './cssBorderParser';
 
-export function buildTableCell(vNode, attributes, rowSpanMap, columnIndex, docxDocumentInstance) {
+export function buildTableCell(
+  vNode: VirtualDOM.VNode,
+  attributes,
+  rowSpanMap,
+  columnIndex,
+  docxDocumentInstance
+) {
   const tableCellFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'tc');
 
   const modifiedAttributes = { ...attributes };
@@ -86,7 +92,7 @@ export function buildTableCell(vNode, attributes, rowSpanMap, columnIndex, docxD
           // eslint-disable-next-line no-plusplus
           for (let iteratorIndex = 0; iteratorIndex < childVNode.children.length; iteratorIndex++) {
             const grandChildVNode = childVNode.children[iteratorIndex];
-            if (grandChildVNode.tagName === 'img') {
+            if ((grandChildVNode as any).tagName === 'img') {
               const imageFragment = buildImage(
                 docxDocumentInstance,
                 grandChildVNode,
@@ -124,7 +130,7 @@ export function buildTableCell(vNode, attributes, rowSpanMap, columnIndex, docxD
   return tableCellFragment;
 }
 
-export const fixupTableCellBorder = (vNode, attributes) => {
+export const fixupTableCellBorder = (vNode: VirtualDOM.VNode, attributes) => {
   if (Object.prototype.hasOwnProperty.call(vNode.properties.style, 'border')) {
     if (vNode.properties.style.border === 'none' || vNode.properties.style.border === 0) {
       attributes.tableCellBorder = {};

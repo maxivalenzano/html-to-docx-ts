@@ -14,7 +14,32 @@ import { fixupMargin } from './fixupMargin';
 import { fixupFontSize } from './fixupFontSize';
 import { fixupColorCode } from './fixupColorCode';
 
-export function buildParagraph(vNode, attributes, docxDocumentInstance) {
+type NumberingAttributes = {
+  levelId: any;
+  numberingId: any;
+};
+
+export type ParagraphAttributes = {
+  color?: string;
+  backgroundColor?: string;
+  verticalAlign?: any;
+  textAlign?: any;
+  strong?: any;
+  fontSize?: any;
+  lineHeight?: any;
+  indentation?: any;
+  display?: any;
+  highlightColor?: any;
+  font?: string;
+  paragraphStyle?: string;
+  numbering?: NumberingAttributes;
+};
+
+export function buildParagraph(
+  vNode: VirtualDOM.VNode | VirtualDOM.VTree,
+  attributes: ParagraphAttributes,
+  docxDocumentInstance
+) {
   const paragraphFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'p');
   const modifiedAttributes = { ...attributes };
   if (isVNode(vNode) && vNode.properties && vNode.properties.style) {

@@ -1,9 +1,9 @@
 import { fragment } from 'xmlbuilder2';
 import namespaces from '../namespaces';
-import { buildExtents } from './buildExtents';
+import { buildExtents, ExtentProps } from './buildExtents';
 import { buildOffset } from './buildOffset';
 
-export function buildGraphicFrameTransform(attributes) {
+export function buildGraphicFrameTransform(attributes: ExtentProps) {
   const graphicFrameTransformFragment = fragment({ namespaceAlias: { a: namespaces.a } }).ele(
     '@a',
     'xfrm'

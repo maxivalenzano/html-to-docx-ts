@@ -25,7 +25,7 @@ const minifyHTMLString = (htmlString) => {
 async function generateContainer(
   htmlString,
   headerHTMLString,
-  documentOptions = {},
+  documentOptions: DocumentOptions = {},
   footerHTMLString
 ) {
   const zip = new JSZip();

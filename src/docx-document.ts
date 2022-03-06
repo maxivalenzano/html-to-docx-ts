@@ -160,10 +160,16 @@ type Margins = {
   right?: number;
 };
 
+type FooterType = 'default' | 'first' | 'even';
+
+type Orientation = 'portrait' | 'landscape';
+
+type HeaderType = 'default' | 'first' | 'even';
+
 class DocxDocument {
   zip: unknown;
   htmlString: string;
-  orientation: string;
+  orientation: Orientation;
   width: number;
   height: number;
   margins: Margins;
@@ -177,11 +183,11 @@ class DocxDocument {
   revision?: number;
   createdAt?: Date;
   modifiedAt?: Date;
-  headerType?: string;
+  headerType?: HeaderType;
   header?: boolean;
-  footerType?: string;
+  footerType?: FooterType;
   footer?: boolean;
-  font: string;
+  font?: string;
   fontSize?: number;
   complexScriptFontSize?: number;
   tableRowCantSplit?: boolean;

@@ -31,7 +31,7 @@ export function buildTable(vNode, attributes, docxDocumentInstance) {
   const tableFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'tbl');
   const modifiedAttributes = { ...attributes };
   if (isVNode(vNode) && vNode.properties) {
-    const tableAttributes = vNode.properties.attributes || {};
+    const tableAttributes: any = vNode.properties.attributes || {};
     const tableStyles = vNode.properties.style || {};
     const tableBorders: TableBorders = {};
     const tableCellBorders: TableCellBorders = {};

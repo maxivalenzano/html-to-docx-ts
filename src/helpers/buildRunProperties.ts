@@ -12,7 +12,13 @@ import {
 } from './buildFragments';
 import { buildShading } from './buildShading';
 
-export function buildRunProperties(attributes) {
+export type RunAttributes = {
+  [x: string]: string | number | any;
+  constructor?: any;
+  fontSize?: number;
+};
+
+export function buildRunProperties(attributes: RunAttributes) {
   const runPropertiesFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'rPr');
   if (attributes && attributes.constructor === Object) {
     Object.keys(attributes).forEach((key) => {

@@ -11,7 +11,7 @@ import {
 
 // eslint-disable-next-line consistent-return
 
-export function fixupColorCode(colorCodeString) {
+export function fixupColorCode(colorCodeString: string): string {
   if (Object.prototype.hasOwnProperty.call(colorNames, colorCodeString.toLowerCase())) {
     const [red, green, blue] = colorNames[colorCodeString.toLowerCase()];
 

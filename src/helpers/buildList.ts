@@ -1,9 +1,14 @@
+import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
 import VNode from 'virtual-dom/vnode/vnode';
 import isVNode from 'virtual-dom/vnode/is-vnode';
 import isVText from 'virtual-dom/vnode/is-vtext';
 import { buildParagraph } from './buildParagraph';
 
-export function buildList(vNode, docxDocumentInstance, xmlFragment) {
+export function buildList(
+  vNode: VirtualDOM.VNode | any,
+  docxDocumentInstance,
+  xmlFragment: XMLBuilder
+) {
   const listElements = [];
 
   let vNodeObjects = [
