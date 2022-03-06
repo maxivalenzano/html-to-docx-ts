@@ -5,7 +5,7 @@ import VNode from 'virtual-dom/vnode/vnode';
 import isVNode from 'virtual-dom/vnode/is-vnode';
 import isVText from 'virtual-dom/vnode/is-vtext';
 import { default as HTMLToVDOM } from 'html-to-vdom';
-import escape from 'escape-html';
+import { escape } from 'html-escaper';
 
 import namespaces from '../namespaces';
 import { vNodeHasChildren } from '../utils/vnode';

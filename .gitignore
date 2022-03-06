@@ -107,3 +107,4 @@ temp/
 /built/*
 /out-tsc/*
 /example.docx
+/stats.html
