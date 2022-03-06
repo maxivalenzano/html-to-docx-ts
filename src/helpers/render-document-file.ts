@@ -1,3 +1,4 @@
+import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
 import { fragment } from 'xmlbuilder2';
 import VText from 'virtual-dom/vnode/vtext';
 import VNode from 'virtual-dom/vnode/vnode';
@@ -19,23 +20,43 @@ const convertHTML = HTMLToVDOM({
   VText,
 });
 
-function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
-  if (
-    vNode.tagName === 'div' &&
-    (vNode.properties.attributes.class === 'page-break' ||
-      (vNode.properties.style && vNode.properties.style['page-break-after']))
-  ) {
-    const paragraphFragment = fragment({ namespaceAlias: { w: namespaces.w } })
-      .ele('@w', 'p')
-      .ele('@w', 'r')
-      .ele('@w', 'br')
-      .att('@w', 'type', 'page')
-      .up()
-      .up()
-      .up();
+function buildPageBreak() {
+  return fragment({ namespaceAlias: { w: namespaces.w } })
+    .ele('@w', 'p')
+    .ele('@w', 'r')
+    .ele('@w', 'br')
+    .att('@w', 'type', 'page')
+    .up()
+    .up()
+    .up();
+}
 
-    xmlFragment.import(paragraphFragment);
-    return;
+function hasPageBreakBefore(vNode: VirtualDOM.VNode): boolean {
+  //TODO: What about classes that implement style??
+  if (
+    (vNode.properties.style && vNode.properties.style['page-break-before']) ||
+    (vNode.properties.attributes && vNode.properties.attributes.class == 'page-break') // custom logic documented in readme.
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function hasPageBreakAfter(vNode: VirtualDOM.VNode): boolean {
+  //TODO: What about classes that implement style??
+  if (vNode.properties.style && vNode.properties.style['page-break-after']) {
+    return true;
+  }
+  return false;
+}
+
+function findXMLEquivalent(
+  docxDocumentInstance,
+  vNode: VirtualDOM.VNode | any,
+  xmlFragment: XMLBuilder
+) {
+  if (hasPageBreakBefore(vNode)) {
+    xmlFragment.import(buildPageBreak());
   }
 
   switch (vNode.tagName) {
@@ -148,10 +169,14 @@ function findXMLEquivalent(docxDocumentInstance, vNode, xmlFragment) {
 }
 
 // eslint-disable-next-line consistent-return
-export function convertVTreeToXML(docxDocumentInstance, vTree, xmlFragment) {
+export function convertVTreeToXML(
+  docxDocumentInstance,
+  vTree: VirtualDOM.VNode | VirtualDOM.VTree | VirtualDOM.VTree[],
+  xmlFragment: XMLBuilder
+) {
   if (!vTree) {
-    // eslint-disable-next-line no-useless-return
-    return '';
+    //FIXME: Previously reutrn empty string, but return type must be XMLBuilder. Returning empty fragment. Perhaps return xmlFragment?
+    return fragment({ namespaceAlias: { w: namespaces.w } });
   }
   if (Array.isArray(vTree) && vTree.length) {
     // eslint-disable-next-line no-plusplus
@@ -159,9 +184,12 @@ export function convertVTreeToXML(docxDocumentInstance, vTree, xmlFragment) {
       const vNode = vTree[index];
       convertVTreeToXML(docxDocumentInstance, vNode, xmlFragment);
     }
-  } else if (isVNode(vTree)) {
+  } else if (!Array.isArray(vTree) && isVNode(vTree)) {
     findXMLEquivalent(docxDocumentInstance, vTree, xmlFragment);
-  } else if (isVText(vTree)) {
+    if (hasPageBreakAfter(vTree)) {
+      xmlFragment.import(buildPageBreak());
+    }
+  } else if (!Array.isArray(vTree) && isVText(vTree)) {
     xmlFragment = buildTextElement(escape(String(vTree.text)));
   }
   return xmlFragment;
