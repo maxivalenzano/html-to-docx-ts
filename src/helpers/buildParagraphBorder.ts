@@ -1,5 +1,5 @@
 import { fragment } from 'xmlbuilder2';
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import namespaces from '../namespaces';
 import { paragraphBordersObject } from '../constants';
 import { buildBorder } from './buildBorder';
