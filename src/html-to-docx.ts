@@ -142,6 +142,7 @@ function addFilesToContainer(
 
     docxDocument.relationshipFilename = headerFileName;
     const { headerId, headerXML } = docxDocument.generateHeaderXML(vTree);
+
     docxDocument.relationshipFilename = documentFileName;
     const fileNameWithExt = `${headerType}${headerId}.xml`;
 

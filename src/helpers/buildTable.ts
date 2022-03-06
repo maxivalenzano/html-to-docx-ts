@@ -9,14 +9,32 @@ import { buildTableProperties } from './buildTableProperties';
 import { buildTableGridFromTableRow } from './buildTableGridFromTableRow';
 import { buildTableGrid } from './buildTableGrid';
 
+export type TableBorders = {
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+  stroke?: string;
+  color?: string;
+  insideV?: number;
+  insideH?: number;
+};
+
+export type TableCellBorders = {
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
 export function buildTable(vNode, attributes, docxDocumentInstance) {
   const tableFragment = fragment({ namespaceAlias: { w: namespaces.w } }).ele('@w', 'tbl');
   const modifiedAttributes = { ...attributes };
   if (isVNode(vNode) && vNode.properties) {
     const tableAttributes = vNode.properties.attributes || {};
     const tableStyles = vNode.properties.style || {};
-    const tableBorders: any = {};
-    const tableCellBorders: any = {};
+    const tableBorders: TableBorders = {};
+    const tableCellBorders: TableCellBorders = {};
     let [borderSize, borderStrike, borderColor] = [2, 'single', '000000'];
 
     // eslint-disable-next-line no-restricted-globals

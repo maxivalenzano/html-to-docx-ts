@@ -106,3 +106,4 @@ tmp/
 temp/
 /built/*
 /out-tsc/*
+/example.docx

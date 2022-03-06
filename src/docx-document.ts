@@ -1,5 +1,6 @@
 import { create, fragment } from 'xmlbuilder2';
 import { nanoid } from 'nanoid';
+import { Element } from '@oozcitak/dom/lib/dom/interfaces';
 
 import {
   generateCoreXML,
@@ -33,6 +34,23 @@ import {
   imageType,
 } from './constants';
 import { getListStyleType, getListPrefixSuffix } from './utils/list';
+import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
+
+export type SectionXMLResponse = SectionXMLHeader | SectionXMLFooter;
+
+export type SectionType = 'header' | 'footer';
+
+export type SectionXMLHeader = {
+  type: 'header';
+  headerId: string;
+  headerXML: XMLBuilder;
+};
+
+export type SectionXMLFooter = {
+  type: 'footer';
+  footerId: string;
+  footerXML: XMLBuilder;
+};
 
 function generateContentTypesFragments(contentTypesXML, type, objects) {
   if (objects && Array.isArray(objects)) {
@@ -72,7 +90,7 @@ function generateXMLString(xmlString) {
   return xmlDocumentString.toString({ prettyPrint: true });
 }
 
-function generateSectionXML(vTree, type = 'header') {
+function generateSectionXML(vTree, type: SectionType = 'header'): SectionXMLResponse {
   const sectionXML = create({
     encoding: 'UTF-8',
     standalone: true,
@@ -89,7 +107,11 @@ function generateSectionXML(vTree, type = 'header') {
 
   const XMLFragment = fragment();
   convertVTreeToXML(this, vTree, XMLFragment);
-  if (type === 'footer' && (XMLFragment.first().node as any).tagName === 'p' && this.pageNumber) {
+  if (
+    type === 'footer' &&
+    (XMLFragment.first().node as Element).tagName === 'p' &&
+    this.pageNumber
+  ) {
     XMLFragment.first().import(
       fragment({ namespaceAlias: { w: namespaces.w } })
         .ele('@w', 'fldSimple')
@@ -104,50 +126,81 @@ function generateSectionXML(vTree, type = 'header') {
   const referenceName = type === 'header' ? 'Header' : 'Footer';
   this[`last${referenceName}Id`] += 1;
 
-  return { [`${type}Id`]: this[`last${referenceName}Id`], [`${type}XML`]: sectionXML };
+  switch (type) {
+    case 'header':
+      return { type: 'header', headerId: this[`last${referenceName}Id`], headerXML: sectionXML };
+    case 'footer':
+      return { type: 'footer', footerId: this[`last${referenceName}Id`], footerXML: sectionXML };
+    default:
+      throw new Error('invalid type, must be footer | header');
+  }
 }
 
+type LineNumberOptions = {
+  countBy?: number;
+  start?: number;
+  restart?: string;
+};
+
+type NumberObjectPropertiesProperties = {
+  attributes: unknown[];
+  style: string;
+};
+
+type NumberObjectProperties = {
+  numberingId: number;
+  type: string;
+  properties?: NumberObjectPropertiesProperties;
+};
+
+type GenerateSectionXMLFunction = (vTree: unknown, section: SectionType) => SectionXMLResponse;
+
+type Margins = {
+  left?: number;
+  right?: number;
+};
+
 class DocxDocument {
-  zip: any;
-  htmlString: any;
-  orientation: any;
+  zip: unknown;
+  htmlString: string;
+  orientation: string;
   width: number;
   height: number;
-  margins: any;
+  margins: Margins;
   availableDocumentSpace: number;
-  title: any;
-  subject: any;
-  creator: any;
-  keywords: any;
-  description: any;
-  lastModifiedBy: any;
-  revision: any;
-  createdAt: any;
-  modifiedAt: any;
-  headerType: any;
-  header: any;
-  footerType: any;
-  footer: any;
-  font: any;
-  fontSize: any;
-  complexScriptFontSize: any;
-  tableRowCantSplit: any;
-  pageNumber: any;
-  skipFirstHeaderFooter: any;
-  lineNumber: any;
+  title?: string;
+  subject?: string;
+  creator?: string;
+  keywords: string[];
+  description?: string;
+  lastModifiedBy?: string;
+  revision?: number;
+  createdAt?: Date;
+  modifiedAt?: Date;
+  headerType?: string;
+  header?: boolean;
+  footerType?: string;
+  footer?: boolean;
+  font: string;
+  fontSize?: number;
+  complexScriptFontSize?: number;
+  tableRowCantSplit?: boolean;
+  pageNumber?: boolean;
+  skipFirstHeaderFooter?: boolean;
+  lineNumber?: LineNumberOptions;
   lastNumberingId: number;
   lastMediaId: number;
   lastHeaderId: number;
   lastFooterId: number;
-  stylesObjects: any[];
-  numberingObjects: any[];
+  stylesObjects: unknown[];
+  numberingObjects: NumberObjectProperties[];
   relationshipFilename: string;
-  relationships: { fileName: string; lastRelsId: number; rels: any[] }[];
-  mediaFiles: any[];
-  headerObjects: any[];
-  footerObjects: any[];
-  documentXML: any;
-  generateSectionXML: any;
+  relationships: { fileName: string; lastRelsId: number; rels: unknown[] }[];
+  mediaFiles: unknown[];
+  headerObjects: unknown[];
+  footerObjects: unknown[];
+  documentXML: XMLBuilder;
+  generateSectionXML: GenerateSectionXMLFunction;
 
   constructor(properties) {
     this.zip = properties.zip;
@@ -255,8 +308,8 @@ class DocxDocument {
         .import(
           fragment({ namespaceAlias: { w: namespaces.w } })
             .ele('@w', 'lnNumType')
-            .att('@w', 'countBy', countBy)
-            .att('@w', 'start', start)
+            .att('@w', 'countBy', countBy.toString())
+            .att('@w', 'start', start.toString())
             .att('@w', 'restart', restart)
         );
     }
@@ -491,12 +544,12 @@ class DocxDocument {
     return lastRelsId;
   }
 
-  generateHeaderXML(vTree) {
-    return this.generateSectionXML(vTree, 'header');
+  generateHeaderXML(vTree): SectionXMLHeader {
+    return this.generateSectionXML(vTree, 'header') as SectionXMLHeader;
   }
 
-  generateFooterXML(vTree) {
-    return this.generateSectionXML(vTree, 'footer');
+  generateFooterXML(vTree): SectionXMLFooter {
+    return this.generateSectionXML(vTree, 'footer') as SectionXMLFooter;
   }
 }
 
