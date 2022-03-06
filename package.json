@@ -12,6 +12,7 @@
   ],
   "main": "dist/html-to-docx.umd.js",
   "module": "dist/html-to-docx.esm.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "npm run build && node example/example-node.js",
     "release": "standard-version",
@@ -42,11 +43,11 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
-    "@open-wc/building-rollup": "^2.0.1",
     "@rollup/plugin-commonjs": "^21.0.2",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.1.1",
     "@rollup/plugin-typescript": "^8.3.1",
+    "@types/virtual-dom": "^2.1.1",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "deepmerge": "^4.2.2",
@@ -65,7 +66,6 @@
     "rollup-plugin-esbuild": "^4.8.2",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-ts": "^2.0.5",
     "standard-version": "^9.3.1",
     "tslib": "^2.3.1",
     "typescript": "^4.6.2"
