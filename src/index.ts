@@ -1,3 +1,4 @@
+import { DocumentOptions } from './types';
 /* eslint-disable no-useless-escape */
 import JSZip from 'jszip';
 import addFilesToContainer from './html-to-docx';
@@ -9,10 +10,10 @@ const minifyHTMLString = (htmlString) => {
         .replace(/\n/g, ' ')
         .replace(/\r/g, ' ')
         .replace(/\r\n/g, ' ')
-        .replace(/[\t]+\</g, '<')
-        .replace(/\>[\t ]+\</g, '><')
-        .replace(/\>[\t ]+$/g, '>');
-
+        .replace(/[\t ]+</g, ' <')
+        .replace(/>[\t ]+$/g, '> ')
+        .replace(/>[\t ]+</g, '> <')
+        .replace(/\s{2,}\B/g, '');
       return minifiedHTMLString;
     }
 
