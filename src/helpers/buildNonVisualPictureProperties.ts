@@ -4,9 +4,9 @@ import { buildNonVisualPictureDrawingProperties } from './buildNonVisualPictureD
 import { buildNonVisualDrawingProperties } from './buildNonVisualDrawingProperties';
 
 export function buildNonVisualPictureProperties(
-  pictureId,
-  pictureNameWithExtension,
-  pictureDescription
+  pictureId: string,
+  pictureNameWithExtension: string,
+  pictureDescription: string
 ) {
   const nonVisualPicturePropertiesFragment = fragment({
     namespaceAlias: { pic: namespaces.pic },

@@ -1,3 +1,4 @@
+import { PictureAttributes } from './buildPicture';
 import { fragment } from 'xmlbuilder2';
 import namespaces from '../namespaces';
 import { buildExtent } from './buildExtent';
@@ -9,7 +10,7 @@ import { buildPositionH } from './buildPositionH';
 import { buildPositionV } from './buildPositionV';
 import { buildWrapSquare } from './buildWrapSquare';
 
-export function buildAnchoredDrawing(graphicType, attributes) {
+export function buildAnchoredDrawing(graphicType: string, attributes: PictureAttributes) {
   const anchoredDrawingFragment = fragment({ namespaceAlias: { wp: namespaces.wp } })
     .ele('@wp', 'anchor')
     .att('distB', '0')

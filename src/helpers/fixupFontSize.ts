@@ -2,7 +2,7 @@ import { pixelRegex, pointRegex, pointToHIP, pixelToHIP } from '../utils/unit-co
 
 // eslint-disable-next-line consistent-return
 
-export function fixupFontSize(fontSizeString) {
+export function fixupFontSize(fontSizeString: string) {
   if (pointRegex.test(fontSizeString)) {
     const matchedParts = fontSizeString.match(pointRegex);
     // convert point to half point

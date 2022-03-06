@@ -18,7 +18,7 @@ const buildUnderline = (type = 'single') =>
     .att('@w', 'val', type)
     .up();
 
-export const buildRunFontFragment = (fontName = defaultFont) =>
+export const buildRunFontFragment = (fontName: string = defaultFont) =>
   fragment({ namespaceAlias: { w: namespaces.w } })
     .ele('@w', 'rFonts')
     .att('@w', 'ascii', fontName)
@@ -31,23 +31,23 @@ export const buildRunStyleFragment = (type = 'Hyperlink') =>
     .att('@w', 'val', type)
     .up();
 
-export const buildTableRowHeight = (tableRowHeight) =>
+export const buildTableRowHeight = (tableRowHeight: string) =>
   fragment({ namespaceAlias: { w: namespaces.w } })
     .ele('@w', 'trHeight')
     .att('@w', 'val', tableRowHeight)
     .att('@w', 'hRule', 'atLeast')
     .up();
 
-export const buildColor = (colorCode) =>
+export const buildColor = (colorCode: string) =>
   fragment({ namespaceAlias: { w: namespaces.w } })
     .ele('@w', 'color')
     .att('@w', 'val', colorCode)
     .up();
 
-export const buildFontSize = (fontSize) =>
+export const buildFontSize = (fontSize: number) =>
   fragment({ namespaceAlias: { w: namespaces.w } })
     .ele('@w', 'sz')
-    .att('@w', 'val', fontSize)
+    .att('@w', 'val', fontSize.toString())
     .up();
 
 export const buildHighlight = (color = 'yellow') =>

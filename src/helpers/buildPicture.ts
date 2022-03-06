@@ -4,6 +4,15 @@ import { buildShapeProperties } from './buildShapeProperties';
 import { buildBinaryLargeImageOrPictureFill } from './buildBinaryLargeImageOrPictureFill';
 import { buildNonVisualPictureProperties } from './buildNonVisualPictureProperties';
 
+export type PictureAttributes = {
+  id: any;
+  fileNameWithExtension: any;
+  description: any;
+  relationshipId: any;
+  width: any;
+  height: any;
+};
+
 export function buildPicture({
   id,
   fileNameWithExtension,
@@ -11,7 +20,7 @@ export function buildPicture({
   relationshipId,
   width,
   height,
-}) {
+}: PictureAttributes) {
   const pictureFragment = fragment({ namespaceAlias: { pic: namespaces.pic } }).ele(
     '@pic',
     'pic:pic'

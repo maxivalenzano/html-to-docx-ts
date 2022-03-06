@@ -1,8 +1,8 @@
 import { fragment } from 'xmlbuilder2';
 import namespaces from '../namespaces';
-import { buildPicture } from './buildPicture';
+import { buildPicture, PictureAttributes } from './buildPicture';
 
-export function buildGraphicData(graphicType, attributes) {
+export function buildGraphicData(graphicType: string, attributes: PictureAttributes) {
   const graphicDataFragment = fragment({ namespaceAlias: { a: namespaces.a } })
     .ele('@a', 'graphicData')
     .att('uri', 'http://schemas.openxmlformats.org/drawingml/2006/picture');

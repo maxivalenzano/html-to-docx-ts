@@ -1,11 +1,12 @@
 import sizeOf from 'image-size';
 import { buildParagraph } from './buildParagraph';
 import { imageType, internalRelationship } from '../constants';
+import DocxDocument from 'docx-document';
 
 export function buildImage(
-  docxDocumentInstance,
+  docxDocumentInstance: DocxDocument,
   vNode: VirtualDOM.VNode | VirtualDOM.VTree,
-  maximumWidth = null
+  maximumWidth: number | null = null
 ) {
   let response = null;
   try {

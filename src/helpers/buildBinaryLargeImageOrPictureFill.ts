@@ -4,7 +4,7 @@ import { buildStretch } from './buildStretch';
 import { buildSrcRectFragment } from './buildSrcRectFragment';
 import { buildBinaryLargeImageOrPicture } from './buildBinaryLargeImageOrPicture';
 
-export function buildBinaryLargeImageOrPictureFill(relationshipId) {
+export function buildBinaryLargeImageOrPictureFill(relationshipId: string) {
   const binaryLargeImageOrPictureFillFragment = fragment({
     namespaceAlias: { pic: namespaces.pic },
   }).ele('@pic', 'blipFill');

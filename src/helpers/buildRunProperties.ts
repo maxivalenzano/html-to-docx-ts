@@ -16,6 +16,12 @@ export type RunAttributes = {
   [x: string]: string | number | any;
   constructor?: any;
   fontSize?: number;
+  color?: string;
+  backgroundColor?: string;
+  font?: string;
+  i?: any;
+  u?: any;
+  strong?: any;
 };
 
 export function buildRunProperties(attributes: RunAttributes) {

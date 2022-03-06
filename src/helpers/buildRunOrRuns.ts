@@ -5,7 +5,7 @@ import { fixupColorCode } from './fixupColorCode';
 import { fixupFontSize } from './fixupFontSize';
 import { buildRun } from './buildRun';
 
-export function buildRunOrRuns(vNode, attributes) {
+export function buildRunOrRuns(vNode: VirtualDOM.VTree, attributes: RunAttributes) {
   if (isVNode(vNode) && vNode.tagName === 'span') {
     const runFragments = [];
 

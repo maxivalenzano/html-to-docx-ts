@@ -2,8 +2,8 @@ import { fragment } from 'xmlbuilder2';
 import namespaces from '../namespaces';
 
 export function buildNonVisualDrawingProperties(
-  pictureId,
-  pictureNameWithExtension,
+  pictureId: string,
+  pictureNameWithExtension: string,
   pictureDescription = ''
 ) {
   return fragment({ namespaceAlias: { pic: namespaces.pic } })
