@@ -73,7 +73,19 @@ const htmlString = `<!DOCTYPE html>
         <ol style="list-style-type: decimal;">
             <li>Ordered list element</li>
         </ol>
-        <div class="page-break" style="page-break-after: always"></div>
+
+        <div class="page-break" style="page-break-before: always">
+        <h2>Page-Break-Before</h2>
+        <p>Section with a page-break-before that should occur before this section is rendered.</p>
+        </div>
+
+        <div class="page-break" style="page-break-after: always">
+        <h2>Page-Break-After</h2>
+        <p>Section with a page-break-after that should occur after. END OF SECTION</p>
+        </div>
+        <div>
+        This content should be on a new page.
+        </div>
         <ul>
             <li>
                 <a href="https://en.wikipedia.org/wiki/Coffee">
