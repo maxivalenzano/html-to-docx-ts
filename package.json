@@ -1,7 +1,7 @@
 {
-  "name": "html-to-docx",
+  "name": "html-to-docx-ts",
   "version": "1.5.0",
-  "description": "HTML to DOCX converter",
+  "description": "HTML to DOCX converter with types",
   "keywords": [
     "html",
     "docx",
@@ -12,6 +12,7 @@
   ],
   "main": "dist/html-to-docx.umd.js",
   "module": "dist/html-to-docx.esm.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "npm run build && node example/example-node.js",
     "release": "standard-version",
