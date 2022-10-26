@@ -24,7 +24,7 @@ export default {
   ],
   output: [
     {
-      file: 'dist/html-to-docx.esm.js',
+      file: 'dist/html-to-docx-ts.esm.js',
       format: 'es',
       sourcemap: true,
       banner: `// ${meta.homepage} v${meta.version} Copyright ${new Date().getFullYear()} ${
@@ -32,7 +32,7 @@ export default {
       }`,
     },
     {
-      file: 'dist/html-to-docx.umd.js',
+      file: 'dist/html-to-docx-ts.umd.js',
       format: 'umd',
       name: 'HTMLToDOCX',
       sourcemap: true,

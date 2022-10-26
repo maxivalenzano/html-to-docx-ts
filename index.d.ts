@@ -1,4 +1,4 @@
-declare module 'html-to-docx'
+declare module 'html-to-docx-ts'
 {
     interface Margins
     {
