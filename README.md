@@ -3,6 +3,8 @@ html-to-docx
 
 [![NPM Version][npm-image]][npm-url]
 
+This library is a forked project for specific purposes.
+
 html-to-docx is a js library for converting HTML documents to DOCX format supported by Microsoft Word 2007+, LibreOffice Writer, Google Docs, WPS Writer etc.
 
 It was inspired by [html-docx-js] project but mitigates the problem of documents generated being non-compatiable with word processors like Google Docs and libreOffice Writer that doesn't support [altchunks] feature.
@@ -134,3 +136,4 @@ MIT
 [cm]: https://en.wikipedia.org/wiki/Centimetre "cm"
 [inch]: https://en.wikipedia.org/wiki/Inch "inch"
 [pt]: https://en.wikipedia.org/wiki/Point_(typography) "pt"
+[html-to-docx]: https://github.com/privateOmega/html-to-docx "html-to-docx"
